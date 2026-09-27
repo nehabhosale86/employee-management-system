@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Details</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .topbar {
+            background: #1f2937;
+            color: white;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #667085;
+        }
+
+        .details-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .employee-name {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-item {
+            padding: 18px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .label {
+            font-size: 13px;
+            color: #667085;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .actions {
+            margin-top: 30px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 11px 18px;
+            background: #2868c7;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 650px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 18px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="topbar">
+    EmployeeSystem
+</div>
+
+<div class="container">
+
+    <div class="heading">
+        <h1>Employee Details</h1>
+        <p>View complete information about this employee.</p>
+    </div>
+
+    <div class="details-card">
+
+        <div class="employee-name"
+             th:text="${employee.firstName + ' ' + employee.lastName}">
+            Employee Name
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-item">
+                <div class="label">First Name</div>
+                <div class="value" th:text="${employee.firstName}">Neha</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="label">Last Name</div>
+                <div class="value" th:text="${employee.lastName}">Bhosale</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="label">Email</div>
+                <div class="value" th:text="${employee.email}">
+                    email@example.com
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <div class="label">Department</div>
+                <div class="value" th:text="${employee.department}">
+                    Computer
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <div class="label">Salary</div>
+                <div class="value" th:text="${employee.salary}">
+                    80000
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <div class="label">Joining Date</div>
+                <div class="value" th:text="${employee.joiningDate}">
+                    2026-01-01
+                </div>
+            </div>
+
+        </div>
+
+        <div class="actions">
+            <a th:href="@{/employees}" class="back-btn">
+                ← Back to Employees
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

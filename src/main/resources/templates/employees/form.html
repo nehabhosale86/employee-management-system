@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee form | PeopleDesk</title>
+    <style>
+        :root {
+            font-family: Arial, sans-serif;
+            color: #182230;
+            background: #f4f7fb;
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; }
+
+        .topbar {
+            height: 68px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border-bottom: 1px solid #e6eaf0;
+        }
+
+        .brand { color: #173b70; font-size: 20px; font-weight: 700; }
+        .brand span { color: #3978d4; }
+
+        main { max-width: 760px; margin: 42px auto; padding: 0 20px; }
+        .back-link { color: #2868c7; font-size: 14px; text-decoration: none; }
+        .eyebrow {
+            margin: 26px 0 8px;
+            color: #3978d4;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        h1 { margin: 0; font-size: 30px; }
+        .subtitle { margin: 9px 0 24px; color: #667085; }
+
+        .form-card {
+            padding: 28px;
+            border: 1px solid #e6eaf0;
+            border-radius: 12px;
+            background: white;
+        }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .field { display: flex; flex-direction: column; gap: 8px; }
+        .field.full { grid-column: 1 / -1; }
+
+        label { color: #344054; font-size: 14px; font-weight: 700; }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0d5dd;
+            border-radius: 7px;
+            color: #182230;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #3978d4;
+            outline: 3px solid #e8f0fc;
+        }
+
+        .hint { color: #667085; font-size: 12px; }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #edf0f4;
+        }
+
+        .button {
+            padding: 12px 18px;
+            border: 0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button-primary { background: #2868c7; color: white; }
+        .button-secondary { background: #eef2f7; color: #344054; }
+
+        @media (max-width: 600px) {
+            main { margin-top: 28px; }
+            .form-card { padding: 20px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .field.full { grid-column: auto; }
+        }
+    </style>
+</head>
+<body>
+<header class="topbar">
+    <div class="brand">People<span>Desk</span></div>
+</header>
+
+<main>
+    <a class="back-link" th:href="@{/employees}">&larr; Back to employees</a>
+    <p class="eyebrow">People / Employee record</p>
+    <h1>Add or edit employee</h1>
+    <p class="subtitle">Enter the employee details below.</p>
+
+    <section class="form-card">
+        <form th:action="@{/employees/save}" th:object="${employee}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-grid">
+                <div class="field">
+                    <label for="firstName">First name</label>
+                    <input id="firstName" type="text" th:field="*{firstName}"
+                           placeholder="e.g. Asha"
+                           minlength="2"
+                           required>
+                </div>
+
+                <div class="field">
+                    <label for="lastName">Last name</label>
+                    <input id="lastName" type="text" th:field="*{lastName}"
+                           placeholder="e.g. Patil"
+                           minlength="2"
+                           required>
+                </div>
+
+                <div class="field full">
+                    <label for="email">Email address</label>
+                    <input id="email" type="email" th:field="*{email}"
+                           placeholder="name@example.com" required>
+                </div>
+
+                <div class="field">
+                    <label for="department">Department</label>
+                    <input id="department" type="text" th:field="*{department}"
+                           placeholder="e.g. Engineering" required>
+                </div>
+
+                <div class="field">
+                    <label for="salary">Salary</label>
+                    <input id="salary" type="number" th:field="*{salary}"
+                           min="0" step="0.01" placeholder="e.g. 35000" required>
+                    <span class="hint">Enter the monthly salary.</span>
+                </div>
+
+                <div class="field full">
+                    <label for="joiningDate">Joining date</label>
+                    <input id="joiningDate" type="date" th:field="*{joiningDate}" required>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a class="button button-secondary" th:href="@{/employees}">Cancel</a>
+                <button class="button button-primary" type="submit">Save employee</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
